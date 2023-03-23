@@ -1,6 +1,8 @@
 package Page;
 
 import Utils.DriverMethods;
+import Utils.Log;
+import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
@@ -9,13 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import javax.swing.*;
-
-public class LoginPage extends DriverMethods {
+public class LoginPage extends DriverMethods{
 
     private WebDriver driver;
 
-    Logger logger= LogManager.getLogger(LoginPage.class);
+    Log logger= new Log();
 
     public LoginPage(WebDriver driver){
         super(driver);
@@ -44,17 +44,17 @@ public class LoginPage extends DriverMethods {
     }
 
     public void typeEmail(String email){
-        logger.info("Entering email");
-        emailInput.sendKeys(email);
+        logger.info(Status.INFO,"Entering email");
+        sendKeys(emailInput,email);
     }
 
     public void typePass(String password){
-        logger.info("Entering Password");
-        passInput.sendKeys(password);
+        logger.info(Status.INFO,"Entering Password");
+        sendKeys(passInput,password);
     }
 
     public void clickLogin() {
-        logger.info("Clicking login CTA");
-        loginCTA.click();
+        logger.info(Status.INFO,"Clicking login CTA");
+        click(loginCTA);
     }
 }

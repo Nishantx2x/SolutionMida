@@ -1,6 +1,8 @@
 package Page;
 
 import Utils.DriverMethods;
+import Utils.Log;
+import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -9,14 +11,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import javax.swing.*;
+import java.util.List;
 
 public class HomePage extends DriverMethods {
 
     private WebDriver driver;
 
-    Logger logger= LogManager.getLogger(HomePage.class);
+    Log logger= new Log();
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -36,34 +40,69 @@ public class HomePage extends DriverMethods {
     @FindBy(xpath = "(//label[text()='Upcoming'])[1]")
     private WebElement upcomingTab;
 
-    public void clickSelectSportsArrow(){
-        logger.info("Clicking on select arrow sports");
-        selectSportsArrow.click();
+    @FindBy(xpath = "//div[@style='color: rgb(33, 33, 33); font-size: 16px; font-weight: bold;']")
+    private List<WebElement> matchNames;
+
+    @FindBy(xpath = "//i[@title='Publish Match']")
+    private WebElement publishMatch;
+
+    @FindBy(xpath = "//button[text()='Update Squad']")
+    private WebElement updateSquad;
+    @FindBy(xpath = "//button[text()='Verify and Publish']")
+    private WebElement verifyAndPublish;
+
+    @FindBy(xpath = "//button[text()='Yes']")
+    private WebElement yesPopUP;
+
+
+    public void clickSelectSportsArrow() throws InterruptedException {
+        logger.info(Status.INFO,"Clicking on select arrow sports");
+        hoverAndClick(selectSportsArrow);
     }
 
     public void clickOnSports(String sports){
-        logger.info("Clicking on select arrow sports");
-        driver.findElement(By.xpath("//span[text()='"+sports+"']")).click();
+        logger.info(Status.INFO,"Clicking on select arrow sports");
+        click(findElement(driver,By.xpath("//div[text()='"+sports+"']")));
     }
     public void clickLeftDFS(){
-        logger.info("Clicking DFS on left menu");
-        leftDFS.click();
+        logger.info(Status.INFO,"Clicking DFS on left menu");
+        click(leftDFS);
     }
 
     public void clickLeftFixture(){
-        logger.info("Clicking Fixture on left menu");
-        leftFixture.click();
+        logger.info(Status.INFO,"Clicking Fixture on left menu");
+        click(leftFixture);
     }
 
-    public void clickUpcomingTab(String upcoming){
-        logger.info("Clicking on upcoming tab");
-        upcomingTab.click();
+    public void clickUpcomingTab(){
+        logger.info(Status.INFO,"Clicking on upcoming tab");
+        click(upcomingTab);
     }
 
-    public void changeSports(String sportsName){
-        logger.info("Selecting sports "+sportsName);
+    public void changeSports(String sportsName) throws InterruptedException {
+        logger.info(Status.INFO,"Selecting sports "+sportsName);
         clickSelectSportsArrow();
         clickOnSports(sportsName);
     }
+
+    public void clickPublishMatch(){
+        logger.info(Status.INFO,"Clicking on publish match icon");
+        click(publishMatch);
+    }
+
+    public void clickUpdate(){
+        logger.info(Status.INFO,"Clicking on update squad");
+        click(updateSquad);
+    }
+    public void clickVerifyAndPublish(){
+        logger.info(Status.INFO,"Clicking on verify and publish squad");
+        click(verifyAndPublish);
+    }
+
+    public void clickYes(){
+        logger.info(Status.INFO,"Clicking on yes");
+        click(yesPopUP);
+    }
+
 
 }
