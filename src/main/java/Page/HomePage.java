@@ -3,12 +3,10 @@ package Page;
 import Utils.DriverMethods;
 import Utils.Log;
 import com.aventstack.extentreports.Status;
+import com.sun.org.apache.bcel.internal.generic.MONITORENTER;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -53,6 +51,21 @@ public class HomePage extends DriverMethods {
 
     @FindBy(xpath = "//button[text()='Yes']")
     private WebElement yesPopUP;
+
+    @FindBy(xpath = "//input[@name='SelectAllTemp']")
+    private WebElement selectAllTemplate;
+    
+    @FindBy(xpath = "//button[@class='btn-secondary-outline btn btn-secondary']")
+    private WebElement createContest;
+
+    @FindBy(xpath = "//tr[@class='active']")
+    private List<WebElement> playerData;
+
+    @FindBy(xpath = "//div[@class='contest-list contest-card-body']")
+    private List<WebElement> template;
+
+    @FindBy(xpath = "(//h6[@class='livcardh6dfs'])[2]")
+    private WebElement leagueName;
 
 
     public void clickSelectSportsArrow() throws InterruptedException {
@@ -104,5 +117,39 @@ public class HomePage extends DriverMethods {
         click(yesPopUP);
     }
 
+    public void clickAllTemplate(){
+        logger.info(Status.INFO,"Clicking on select all template");
+        click(selectAllTemplate);
+    }
 
+    public void clickCreateContest(){
+        logger.info(Status.INFO,"Clicking on create contest");
+        click(createContest);
+    }
+
+    public void acceptCreateAlert() throws InterruptedException {
+        logger.info(Status.INFO,"Accepting the create contest alert");
+        Thread.sleep(2000);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
+    public int playerData(){
+        logger.info(Status.INFO,"Checking players are available or not");
+        return playerData.size();
+    }
+
+    public void clickUpdateSquad(){
+        logger.info(Status.INFO,"Clicking on update squad");
+        click(updateSquad);
+    }
+
+    public int getAllTemplateSize(){
+        logger.info(Status.INFO,"Checking templates are available or not");
+        return template.size();
+    }
+
+    public String getLeagueName(){
+        return leagueName.getText();
+    }
 }
