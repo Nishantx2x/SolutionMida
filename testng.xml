@@ -4,6 +4,8 @@
     <parameter name="headless" value="false"/>
     <parameter name="url" value="https://admin.devakhada.com/"/>
     <test verbose="2" preserve-order="true" name="Login Module">
+<!--        <parameter name="email" value=""/>-->
+<!--        <parameter name="password" value="amarg6413"/>-->
         <classes>
             <class name="Login"></class>
         </classes>
