@@ -6,6 +6,7 @@ import org.bouncycastle.jcajce.provider.drbg.DRBG;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Login extends WebSetup {
@@ -22,9 +23,10 @@ public class Login extends WebSetup {
     }
 
     @Test(description = "Login method ", invocationCount = 1)
-    public void Login() throws InterruptedException {
-        loginPage.typeEmail("amar.gupta@supersixsports.com");
-        loginPage.typePass("");
+    @Parameters({"email","password"})
+    public void Login(String email,String password) {
+        loginPage.typeEmail(email);
+        loginPage.typePass(password);
         loginPage.clickLogin();
         assertion.assertAll();
     }
