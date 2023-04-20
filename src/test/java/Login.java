@@ -24,7 +24,7 @@ public class Login extends WebSetup {
     @Test(description = "Login method ", invocationCount = 1)
     public void Login() throws InterruptedException {
         loginPage.typeEmail("amar.gupta@supersixsports.com");
-        loginPage.typePass("Amar678!!");
+        loginPage.typePass("");
         loginPage.clickLogin();
         assertion.assertAll();
     }
@@ -40,6 +40,7 @@ public class Login extends WebSetup {
             homePage.clickUpdateSquad();
             Thread.sleep(3000);
         }
+        homePage.updateSalary();
         homePage.clickVerifyAndPublish();
         homePage.clickYes();
         Thread.sleep(3000);

@@ -67,6 +67,12 @@ public class HomePage extends DriverMethods {
     @FindBy(xpath = "(//h6[@class='livcardh6dfs'])[2]")
     private WebElement leagueName;
 
+    @FindBy(xpath = "//div[@class='tab-pane active']/child::div/div/table/tbody/tr/td/input[@class='salary-input form-control']")
+    private List<WebElement> salary;
+
+    @FindBy(xpath = "//ul[@class='nav nav-tabs']/descendant::a[contains(@class,'nav-link')]/parent::li")
+    private List<WebElement> players;
+
 
     public void clickSelectSportsArrow() throws InterruptedException {
         logger.info(Status.INFO,"Clicking on select arrow sports");
@@ -151,5 +157,19 @@ public class HomePage extends DriverMethods {
 
     public String getLeagueName(){
         return leagueName.getText();
+    }
+
+    public void updateSalary() throws InterruptedException {
+        for (WebElement player:players) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'}); arguments[0].style.border='3px solid green';", player);
+            Thread.sleep(2000);
+            click(player);
+            for (WebElement web : salary) {
+                if (Float.parseFloat(web.getAttribute("value")) < 7) {
+                    web.clear();
+                    web.sendKeys("7");
+                }
+            }
+        }
     }
 }
