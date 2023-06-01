@@ -55,7 +55,7 @@ public class Login extends WebSetup {
             driver.findElement(By.id("template_league_id")).sendKeys(currentLeague+Keys.RETURN);
             homePage.clickAllTemplate();
             driver.findElement(By.xpath("//button[text()='CONFIRM']")).click();
-            homePage.acceptCreateAlert();
+            homePage.clickOkayContestTemplate();
             driver.get(currentURL);
             Thread.sleep(2000);
         }

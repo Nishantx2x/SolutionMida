@@ -73,6 +73,9 @@ public class HomePage extends DriverMethods {
     @FindBy(xpath = "//ul[@class='nav nav-tabs']/descendant::a[contains(@class,'nav-link')]/parent::li")
     private List<WebElement> players;
 
+    @FindBy(xpath = "//button[@class='close-btn btn btn-success']")
+    private WebElement okayContest;
+
 
     public void clickSelectSportsArrow() throws InterruptedException {
         logger.info(Status.INFO,"Clicking on select arrow sports");
@@ -171,5 +174,14 @@ public class HomePage extends DriverMethods {
                 }
             }
         }
+    }
+
+    public boolean isLeftDFSVisible(){
+        return leftDFS.isDisplayed();
+    }
+
+    public void clickOkayContestTemplate(){
+        logger.info(Status.INFO,"Clicking on okay button");
+        click(okayContest);
     }
 }
